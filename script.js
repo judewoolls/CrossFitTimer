@@ -1,3 +1,11 @@
+const Timers = [];
+
+function clearClock() {
+    clock.textContent = 'SMASH THAT START BUTTON!';
+    Timers.forEach(timer => clearInterval(timer));
+    Timers.length = 0; // Clear the array
+}
+
 const clock = document.querySelector('#clock');
 
 document.querySelectorAll('.timerOption').forEach(option => {
@@ -9,6 +17,7 @@ document.querySelectorAll('.timerOption').forEach(option => {
 
 let amrapButton = document.querySelector('#amrapButton')
 amrapButton.addEventListener('click', (e) => {
+    clearClock();
     e.preventDefault();
     const duration = parseInt(document.querySelector('#amrapDuration').value);
     if (isNaN(duration) || duration <= 0) {
@@ -28,12 +37,7 @@ let totalSeconds = 0;
 
 timerButton.addEventListener('click', (e) => {
     e.preventDefault();
-
-    // If a timer is already running, clear it first
-    if (countUpInterval) {
-        clearInterval(countUpInterval);
-        countUpInterval = null;
-    }
+    clearClock();
 
     totalSeconds = 0;
     countUpInterval = setInterval(() => {
@@ -41,6 +45,7 @@ timerButton.addEventListener('click', (e) => {
         const { minutes, seconds } = minutesAndSeconds(totalSeconds);
         clock.textContent = `Elapsed time: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
     }, 1000);
+    Timers.push(countUpInterval);
 });
 
 // Single stop handler attached once
@@ -50,6 +55,7 @@ stopBtn.addEventListener('click', () => {
         clearInterval(countUpInterval);
         countUpInterval = null;
         alert(`Timer stopped at ${totalSeconds} seconds.`);
+        clearClock();
     } else {
         // optional: ignore or show "no timer running"
     }
@@ -77,4 +83,5 @@ function countDown(seconds) {
         clock.textContent = `Time remaining: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
         remaining--;
     }, 1000);
+    Timers.push(interval);
 }
