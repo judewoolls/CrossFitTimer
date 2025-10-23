@@ -20,6 +20,22 @@ amrapButton.addEventListener('click', (e) => {
     }
 });
 
+let timerButton = document.querySelector('#timerButton')
+timerButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    let totalSeconds = 0;
+    const countUpInterval = setInterval(() => {
+        totalSeconds++;
+        const { minutes, seconds } = minutesAndSeconds(totalSeconds);
+        clock.textContent = `Elapsed time: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+    }, 1000);
+
+    document.querySelector('#stopTimer').addEventListener('click', () => {
+        clearInterval(countUpInterval);
+        alert(`Timer stopped at ${totalSeconds} seconds.`);
+    });
+});
+
 function minutesToSeconds(minutes) {
     return minutes * 60;
 }
