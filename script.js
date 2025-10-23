@@ -21,19 +21,38 @@ amrapButton.addEventListener('click', (e) => {
 });
 
 let timerButton = document.querySelector('#timerButton')
+
+// Replace the inline stop handler by a single shared interval reference:
+let countUpInterval = null;
+let totalSeconds = 0;
+
 timerButton.addEventListener('click', (e) => {
     e.preventDefault();
-    let totalSeconds = 0;
-    const countUpInterval = setInterval(() => {
+
+    // If a timer is already running, clear it first
+    if (countUpInterval) {
+        clearInterval(countUpInterval);
+        countUpInterval = null;
+    }
+
+    totalSeconds = 0;
+    countUpInterval = setInterval(() => {
         totalSeconds++;
         const { minutes, seconds } = minutesAndSeconds(totalSeconds);
         clock.textContent = `Elapsed time: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
     }, 1000);
+});
 
-    document.querySelector('#stopTimer').addEventListener('click', () => {
+// Single stop handler attached once
+const stopBtn = document.querySelector('#stopTimer');
+stopBtn.addEventListener('click', () => {
+    if (countUpInterval) {
         clearInterval(countUpInterval);
+        countUpInterval = null;
         alert(`Timer stopped at ${totalSeconds} seconds.`);
-    });
+    } else {
+        // optional: ignore or show "no timer running"
+    }
 });
 
 function minutesToSeconds(minutes) {
