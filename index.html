@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CrossFit Timer</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <h1>CrossFit Timer</h1>
+    <p>Welcome to the CrossFit Timer application!</p>
+    <ul>
+        <li class="timerOption" data-timer="amrap">AMRAP</li>
+        <li class="timerOption" data-timer="emom">EMOM</li>
+        <li class="timerOption" data-timer="tabata">TABATA</li>
+        <li class="timerOption" data-timer="timer">TIMER</li>
+    </ul>
+
+    <h3 id="clock"></h3>
+    <div>
+        <!-- AMRAP Timer Content Here -->
+        <h2>AMRAP Timer</h2>
+        <p>Set your AMRAP timer here.</p>
+        <form action="#">
+            <label for="amrapDuration">Duration (minutes):</label>
+            <input type="number" id="amrapDuration" name="amrapDuration" min="1">
+            <button type="submit" id="amrapButton">Start AMRAP</button>
+        </form>
+    </div>
+
+    <div>
+        <h2>EMOM Timer</h2>
+        <p>Set your EMOM timer here.</p>
+        <form action="#">
+            <label for="emomDuration">Duration (minutes):</label>
+            <input type="number" id="emomDuration" name="emomDuration" min="1" required>
+            <label for="emomExercises">Exercises:</label>
+            <input type="text" id="emomExercises" name="emomExercises" placeholder="Enter exercises separated by commas" required>
+            <button type="submit" id="emomButton">Start EMOM</button>
+        </form>
+    </div>
+
+    <div>
+        <h2>TABATA Timer</h2>
+        <p>Set your TABATA timer here.</p>
+        <form action="#">
+            <label for="tabataRounds">Rounds:</label>
+            <input type="number" id="tabataRounds" name="tabataRounds" min="1">
+            <label for="tabataWork">Work (seconds):</label>
+            <input type="number" id="tabataWork" name="tabataWork" min="1">
+            <label for="tabataRest">Rest (seconds):</label>
+            <input type="number" id="tabataRest" name="tabataRest" min="1">
+            <button type="submit" id="tabataButton">Start TABATA</button>
+        </form>
+    </div>
+
+    <div>
+        <h2>General Timer</h2>
+        <p>Set your general timer here.</p>
+        <form action="#">
+            <label for="timerDuration">Duration (minutes):</label>
+            <input type="number" id="timerDuration" name="timerDuration" min="1">
+            <button type="submit" id="timerButton">Start Timer</button>
+        </form>
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
