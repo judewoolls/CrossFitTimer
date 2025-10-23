@@ -1,7 +1,7 @@
 const Timers = [];
 
 function clearClock() {
-    clock.textContent = 'SMASH THAT START BUTTON!';
+    clock.textContent = '0:00';
     Timers.forEach(timer => clearInterval(timer));
     Timers.length = 0; // Clear the array
 }
@@ -54,7 +54,8 @@ stopBtn.addEventListener('click', () => {
     if (countUpInterval) {
         clearInterval(countUpInterval);
         countUpInterval = null;
-        alert(`Timer stopped at ${totalSeconds} seconds.`);
+        const {minutes, seconds} = minutesAndSeconds(totalSeconds)
+        alert(`Timer stopped at ${minutes}:${seconds < 10 ? '0': ''}${seconds}`);
         clearClock();
     } else {
         // optional: ignore or show "no timer running"
